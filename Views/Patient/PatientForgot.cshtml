@@ -1,0 +1,41 @@
+﻿@model HalloDoc_mvc.Entities.DataModels.AspNetUser;
+<head>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/patientForgot.css">
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+<div class="containers bgimg">
+    <div class="forgot-page">
+        <div class="plogo">
+            <img src="~/image/login-logo.png" alt="" class="img-fluid">
+        </div>
+        <div class="previous">
+            <a asp-controller="Patient" asp-action="PatientLogin"> &lt; Back</a>
+        </div>
+        <div class="patient-login-details">
+            <h2>Reset Your Password</h2>
+            <form asp-action="PatientForgot">
+                <div class="form-floating mb-3 d-flex">
+                    <input type="text" class="form-control" asp-for="Email" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Username</label>
+                    <i class="bi bi-person-circle icon"></i>
+                </div>
+
+                <div class="login-btn1">
+                    <button type="submit" class=" form-control login-btn" >Reset Password</button>
+                </div>
+                <div class="backToLogin">
+                    <a asp-controller="Patient" asp-action="PatientLogin">Back To Login</a>
+                </div>
+            </form>
+        </div>
+        <div class="footer-links">
+            <a href="#" class="footer">Terms Of Condition</a>
+            <span class="footer">|</span>
+            <a href="#" class="footer">Privacy Policy</a>
+        </div>
+    </div>
+</div>
+<div class="dark-mode">
+    <img src="/image/noun-dark-mode-4066359.svg" alt="" width="30" height="25">
+</div>

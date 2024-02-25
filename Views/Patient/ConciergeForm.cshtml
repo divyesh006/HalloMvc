@@ -1,0 +1,200 @@
+﻿<head>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/RequestForm.css">
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+
+
+@model HalloDoc_mvc.Entities.Patient.ConciergeForm;
+
+<partial name="_HeaderPartial" />
+<div class="backbtn">
+    <a asp-controller="Patient" asp-action="PatientSubmit"> &lt; Back</a>
+</div>
+<div class="main">
+    <div class="patient-form">
+        <form asp-action="ConciergeForm" class="needs-validate" novalidate>
+            <h5 class="form-label mb-3">Concierge Information</h5>
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" asp-for="ConciergeFirstName" class="form-control" placeholder="name">
+                        <label asp-for="ConciergeFirstName">Your First Name</label>
+                        <span asp-validation-for="ConciergeFirstName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" asp-for="ConciergeLastName" class="form-control" placeholder="last name">
+                        <label asp-for="ConciergeLastName">Your Last Name</label>
+                        <span asp-validation-for="ConciergeLastName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="tel" class="form-control" asp-for="ConciergeMobile">
+                        <span asp-validation-for="ConciergeMobile" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="email" asp-for="ConciergeEmail" class="form-control" placeholder="Email">
+                        <label asp-for="ConciergeEmail">Your Email</label>
+                        <span asp-validation-for="ConciergeEmail" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" asp-for="ConciergePropertyName" class="form-control" placeholder="Relation">
+                        <label asp-for="ConciergePropertyName">Hotel / Property Name</label>
+                    </div>
+                </div>
+            </div>
+            <h5 class="form-label mb-3 mt-3">Patient Information</h5>
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="form-floating mb-3">
+                        <textarea class="form-control" placeholder="Details" asp-for="Symptomos"></textarea>
+                        <label asp-for="Symptomos" class="disableMobile">Enter Brief Details Of Symptomos (Optional)</label>
+                        <label asp-for="Symptomos" class="disableDesk">Details Of Symptomos (Optional)</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" asp-for="PatientFirstName" class="form-control" placeholder="fname">
+                        <label asp-for="PatientFirstName">First Name</label>
+                        <span asp-validation-for="PatientFirstName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" asp-for="PatientLastName" placeholder="lname">
+                        <label asp-for="PatientLastName">Last Name</label>
+                        <span asp-validation-for="PatientLastName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="date" asp-for="BirthDate" class="form-control">
+                        <label asp-for="BirthDate">Date Of Birth</label>
+                    </div>
+                </div>
+            </div>
+            <h5 class="form-label mb-3 mt-3">Concierge Location</h5>
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" asp-for="Street" class="form-control" placeholder="street">
+                        <label asp-for="Street">Street</label>
+                        <span asp-validation-for="Street" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" asp-for="City" class="form-control" placeholder="city">
+                        <label asp-for="City">City</label>
+                        <span asp-validation-for="City" class="text-danger"></span>
+                    </div>
+                </div>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" asp-for="State" class="form-control" placeholder="state">
+                        <label asp-for="State">State</label>
+                        <span asp-validation-for="State" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" asp-for="ZipCode" class="form-control" placeholder="zipCode">
+                        <label asp-for="ZipCode">Zip Code</label>
+                        <span asp-validation-for="ZipCode" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <h5 class="form-label mb-3 mt-3">Patient Contact Information</h5>
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" asp-for="PatientEmail" placeholder="email">
+                        <label asp-for="PatientEmail">Email</label>
+                        <span asp-validation-for="PatientEmail" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="tel" class="form-control" asp-for="PatientMobile">
+                        <span asp-validation-for="PatientMobile" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <h5 class="form-label mb-3 mt-3">
+                Patient Location
+            </h5>
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" asp-for="Room" class="form-control" placeholder="Room">
+                        <label asp-for="Room">Room # / Suite (Optional)</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-btn">
+                    <button type="submit" class="btn btn-primary mx-3 submitBtn">Submit</button>
+                    <button type="button" class="btn btn-light cancle">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<partial name="_FooterPartial" />
+
+<script>
+    swal(
+    'Information!',
+    'When submitting a request, you must provide the correct contact information for the patient or the responsibility party. Failure to provide the correct email and phone number will delay service or be declined.',
+    'warning'
+);
+    const phoneInputField = document.querySelector("#ConciergeMobile");
+    const phoneInput = window.intlTelInput(phoneInputField, {
+        utilsScript:
+            "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+    });
+</script>
+<script>
+    phoneInputField1 = document.querySelector("#PatientMobile");
+    phoneInput1 = window.intlTelInput(phoneInputField1, {
+        utilsScript:
+            "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+    });
+</script>
+<script>
+    const input = document.querySelectorAll("#ConciergeMobile");
+    input.forEach(i => {
+        window.intlTelInput(i, {
+            initialCountry: "in",
+            autoInsertDialCode: true,
+            nationalMode: false,
+            utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@19.2.16/build/js/utils.js",
+        });
+    })
+</script>
+<script>
+    const input1 = document.querySelectorAll("#PatientMobile");
+
+    input1.forEach(i => {
+        window.intlTelInput(i, {
+            initialCountry: "in",
+            autoInsertDialCode: true,
+            nationalMode: false,
+            utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@19.2.16/build/js/utils.js",
+        });
+    })
+</script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<partial name="_ValidationScriptsPartial" />

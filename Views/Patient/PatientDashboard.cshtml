@@ -1,0 +1,160 @@
+﻿
+@model List<Request>;
+
+@{
+    int i = 0;
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/PatientDashboard.css">
+    @* <link rel="stylesheet" href="~/css/PatientFooter.css"> *@
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+
+<partial name="_PatientHeaderPartial" />
+
+<div class="main">
+    @* <h2>Medical History</h2> *@
+
+    <div class="patientTable">
+        <div class="newRequestBtn">
+            <button type="button" class="newRequest" data-toggle="modal" data-target="#exampleModalCenter" id="newRequest" onclick="openModal()">Create New Request</button>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr class="table-active">
+                        <th scope="col" class="tableHead">Created Date</th>
+                        <th scope="col" class="tableHead">Current Status</th>
+                        <th scope="col" class="tableHead">Document</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                        @foreach (var request in Model)
+                        {
+                        <tr>
+                            <td>@request.CreatedDate.ToString("MMM") @request.CreatedDate.Day @request.CreatedDate.Year</td>
+                           
+                                @if(request.Status == 1)
+                                {
+                                    <td>unassigned</td>
+                                }
+                            <td>
+                            @foreach(var reqFile in ViewBag.RequestFile)
+                            {
+
+                                @if (reqFile.RequestId == request.RequestId)
+                                {
+                                    <a class="document" asp-controller="Patient" asp-action="ViewDocument" asp-route-id="@request.RequestId">(@ViewBag.RequestIdCounts[request.RequestId]) Documents</a>
+                                    break;
+                                }
+                            }
+                            </td>
+                        </tr>
+                        }
+                </tbody>
+            </table>
+        </div>
+        @foreach (var request in Model)
+        {
+            if (true)
+            {
+                i++;
+            }
+            <div class="accordion mb-4" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading_@i">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_@i" aria-expanded="true" aria-controls="collapse_@i">
+                            @request.CreatedDate.ToString("MMM") @request.CreatedDate.Day @request.CreatedDate.Year
+                        </button>
+                    </h2>
+                    <div id="collapse_@i" class="accordion-collapse collapse show" aria-labelledby="heading_@i" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <strong>
+                                @if (request.Status == 1)
+                                {
+                                    <p>unassigned</p>
+                                }
+                            </strong>
+                            @foreach (var reqFile in ViewBag.RequestFile)
+                            {
+
+                                @if (reqFile.RequestId == request.RequestId)
+                                {
+                                    <a class="document" asp-controller="Patient" asp-action="ViewDocument" asp-route-id="@request.RequestId">(@ViewBag.RequestIdCounts[request.RequestId]) Documents</a>
+                                    break;
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h5 class="modal-title text-light" id="exampleModalLongTitle">Create New Request</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Here, I want to create new Request for...</p>
+                <div class="d-flex justify-content-center">
+                    <div class="px-2">
+                        <button type="button" class="me" id="btnMe" onclick="onMeClick()">Me</button>
+                    </div>
+                    <div>
+                        <button type="button" class="someone" id="btnSe" onclick="onSeClick()">Some One Else</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="close" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="continue" onclick="onContinueClick()">Continue</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<partial name="_FooterPartial" />
+
+<script>
+    function toggleMenu() {
+        var menu1 = document.querySelector('.slideabr');
+        menu1.style.display = (menu1.style.display === 'block') ? 'none' : 'block';
+    }
+
+    function openModal() {
+        $('#exampleModalCenter').modal('show'); 
+    }
+
+    function onMeClick() {
+        var element = document.getElementById("btnMe");
+        element.classList.add("mactive");
+        document.getElementById("btnSe").classList.remove("mactive");
+    }
+
+    function onSeClick() {
+        var element = document.getElementById("btnSe");
+        element.classList.add("mactive");
+        document.getElementById("btnMe").classList.remove("mactive");
+    }
+
+    function onContinueClick() {
+        if (document.getElementById("btnMe").classList.contains("mactive")) {
+            window.location.href = '/dashboard/patient-request';
+        }
+        else {
+            window.location.href = '/dashboard/family-friend-request';
+        }
+    }
+</script>

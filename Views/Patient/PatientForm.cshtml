@@ -1,0 +1,182 @@
+﻿
+@model HalloDoc_mvc.Models.PatientForm;
+@* @model HalloDoc_mvc.Models.AspNetUser;
+ *@
+<head>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/RequestForm.css">
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+
+<partial name="_HeaderPartial" />
+
+<div class="backbtn">
+    <a asp-controller="Patient" asp-action="PatientSubmit"> &lt; Back</a>
+</div>
+<div class="main">
+    <div class="patient-form">
+        <h5 class="form-label mb-3">Patient Information</h5>
+        <form asp-action="PatientForm" enctype="multipart/form-data" class="needs-validate" novalidate>
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="form-floating mb-3">
+                        <textarea class="form-control" placeholder="Details" asp-for="Symptomos"></textarea>
+                        <label asp-for="Symptomos" class="disableMobile">
+                            Enter Brief Details Of Symptomos
+                            (Optional)
+                        </label>
+                        <label asp-for="Symptomos" class="disableDesk">Details Of Symptomos (Optional)</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" asp-for="FirstName" class="form-control" placeholder="fname">
+                        <label asp-for="FirstName">First Name</label>
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" asp-for="LastName" placeholder="lname">
+                        <label for="LastName">Last Name</label>
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="date" asp-for="BirthDate" class="form-control">
+                        <label asp-for="BirthDate">Date Of Birth</label>
+                    </div>
+                </div>
+            </div>
+            <h5 class="form-label mb-3">Patient Contact Information</h5>
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" asp-for="Email" onblur="checkEmailExists()" placeholder="email">
+                        <label asp-for="Email">Email</label>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="tel" class="form-control" asp-for="Mobile">
+                        <span asp-validation-for="Mobile" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6" id="passwordDiv" style="display:none;">
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" asp-for="PasswordHash" placeholder="password">
+                        <label asp-for="PasswordHash">Password</label>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6" id="cpasswordDiv" style="display:none;">
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" asp-for="ConfirmPasswordHash" placeholder="password">
+                        <label asp-for="ConfirmPasswordHash">Confirm Password</label>
+                    </div>
+                </div>
+            </div>
+            <h5 class="form-label mb-3">Patient Location</h5>
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" asp-for="Street" class="form-control" placeholder="street">
+                        <label asp-for="Street">Street</label>
+                        <span asp-validation-for="Street" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" asp-for="City" class="form-control" placeholder="city">
+                        <label asp-for="City">City</label>
+                        <span asp-validation-for="City" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" asp-for="State" class="form-control" placeholder="state">
+                        <label asp-for="State">State</label>
+                        <span asp-validation-for="State" class="text-danger"></span>
+                    </div>
+                </div>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" asp-for="ZipCode" class="form-control" placeholder="zipCode">
+                        <label asp-for="ZipCode">Zip Code</label>
+                        <span asp-validation-for="ZipCode" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" asp-for="Room" class="form-control" placeholder="roomNum">
+                        <label asp-for="Room">Room # / Suite (Optional)</label>
+                    </div>
+                </div>
+            </div>
+            <h5 class="my-4">(Optional) Upload Photo or Document</h5>
+            <div class="row mb-2">
+                <div class="col-12 col-sm-12">
+                    <div class="input-group mb-3">
+                        <input type ="file" class="form-control"  asp-for="file" id="UploadButton" style="padding-right: 0px;">
+            
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-btn">
+                    <button type="submit" class="btn btn-primary mx-3 submitBtn">Submit</button>
+                    <button type="reset" class="btn btn-light cancle">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    phoneInputField1 = document.querySelector("#Mobile");
+    phoneInput1 = window.intlTelInput(phoneInputField1, {
+        utilsScript:
+            "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+    });
+</script>
+
+<script>
+    function checkEmailExists() {
+        var email = document.getElementById("Email").value;
+        fetch('/Patient/PatientForm/CheckEmail/' + email)
+            .then(response => response.json())
+            .then(data => {
+                var patientPassword = document.getElementById('passwordDiv');
+                var patientConfirmPassword = document.getElementById('cpasswordDiv');
+                if (data.exists) {
+                    patientPassword.style.display = 'none';
+                    patientConfirmPassword.style.display = 'none';
+                }
+                else {
+                    patientPassword.style.display = 'block';
+                    patientConfirmPassword.style.display = 'block';
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+</script>
+
+<script>
+    const input = document.querySelectorAll("#Mobile");
+
+    input.forEach(i => {
+        window.intlTelInput(i, {
+            initialCountry: "in",
+            autoInsertDialCode: true,
+            nationalMode: false,
+            utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@19.2.16/build/js/utils.js",
+        });
+    })
+</script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<partial name="_ValidationScriptsPartial" />
+<partial name="_FooterPartial" />

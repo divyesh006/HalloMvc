@@ -1,0 +1,35 @@
+﻿@* @{
+    ViewData["Title"] = "Home Page";
+} *@
+
+
+<head>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/index.css">
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+
+@* <partial name="_HeaderPartial" /> *@
+<div class="main">
+    <div class="logo">
+        <img src="~/image/logo.jpg" alt="" class="img-fluid">
+    </div>
+    <div class="selectBtn">
+        <div class="submitReqs">
+            <button type="submit" class=" form-control submitReq" onclick="@("window.location.href='" + @Url.Action("PatientSubmit", "Patient") + "'");">Submit A Request</button>
+        </div>
+        <div class="registers">
+            <button type="submit" class=" form-control register" onclick="@("window.location.href='" + @Url.Action("PatientLogin", "Patient") + "'");">Register Patient</button>
+        </div>
+    </div>
+    <div class="footer-links">
+        <a href="#" class="footer">Terms Of Condition</a>
+        <span class="footer">|</span>
+        <a href="#" class="footer">Privacy Policy</a>
+    </div>
+    <div class="dark-mode">
+        <img src="/image/noun-dark-mode-4066359.svg" alt="" width="30" height="25">
+    </div>
+</div>
+
+@* <partial name="_FooterPartial" /> *@

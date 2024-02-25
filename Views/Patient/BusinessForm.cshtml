@@ -1,0 +1,205 @@
+﻿@model HalloDoc_mvc.Entities.Patient.BusinessForm;
+
+<head>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/RequestForm.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+            integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
+
+<partial name="_HeaderPartial" />
+
+<div class="backbtn">
+    <a asp-controller="Patient" asp-action="PatientSubmit"> &lt; Back</a>
+</div>
+<div class="main">
+    <div class="patient-form">
+        <form asp-action="BusinessForm" class="needs-validate" novalidate>
+            <h5 class="form-label mb-3">Business Information</h5>
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" asp-for="BusinessFirstName" class="form-control" placeholder="name">
+                        <label for="BusinessFirstName">Your First Name</label>
+                        <span asp-validation-for="BusinessFirstName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" asp-for="BusinessLastName" class="form-control" placeholder="last name">
+                        <label asp-for="BusinessLastName">Your Last Name</label>
+                        <span asp-validation-for="BusinessLastName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="tel" class="form-control" asp-for="BusinessMobile">
+                        <span asp-validation-for="BusinessMobile" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="email" asp-for="BusinessEmail" class="form-control" placeholder="Email">
+                        <label asp-for="BusinessEmail">Your Email</label>
+                        <span asp-validation-for="BusinessEmail" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" asp-for="Property" class="form-control" placeholder="Business">
+                        <label asp-for="Property">Business/Property Name</label>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" asp-for="CaseNumber" class="form-control" placeholder="Case">
+                        <label asp-for="CaseNumber">Case Number (Optional)</label>
+                    </div>
+                </div>
+            </div>
+            <h5 class="form-label mb-3 mt-3">Patient Information</h5>
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="form-floating mb-3">
+                        <textarea class="form-control" placeholder="Details" asp-for="Symptomos"></textarea>
+                        <label asp-for="Symptomos" class="disableMobile">Enter Brief Details Of Symptomos (Optional)</label>
+                        <label asp-for="Symptomos" class="disableDesk">Details Of Symptomos (Optional)</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" asp-for="PatientFirstName" class="form-control" placeholder="fname">
+                        <label asp-for="PatientFirstName">First Name</label>
+                        <span asp-validation-for="PatientFirstName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" asp-for="PatientLastName" placeholder="lname">
+                        <label asp-for="PatientLastName">Last Name</label>
+                        <span asp-validation-for="PatientLastName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="date" asp-for="BirthDate" class="form-control">
+                        <label asp-for="BirthDate">Date Of Birth</label>
+                    </div>
+                </div>
+            </div>
+            <h5 class="form-label mb-3 mt-3">Patient Contact Information</h5>
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" asp-for="PatientEmail" placeholder="email">
+                        <label asp-for="PatientEmail">Email</label>
+                        <span asp-validation-for="PatientEmail" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="tel" class="form-control" asp-for="PatientMobile">
+                        <span asp-validation-for="PatientMobile" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <h5 class="form-label mb-3 mt-3">Patient Location</h5>
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" asp-for="Street" class="form-control" placeholder="street">
+                        <label asp-for="Street">Street</label>
+                        <span asp-validation-for="Street" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" asp-for="City" class="form-control" placeholder="city">
+                        <label asp-for="City">City</label>
+                        <span asp-validation-for="City" class="text-danger"></span>
+                    </div>
+                </div>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" asp-for="State" class="form-control" placeholder="state">
+                        <label asp-for="State">State</label>
+                        <span asp-validation-for="State" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" asp-for="ZipCode" class="form-control" placeholder="zipCode">
+                        <label asp-for="ZipCode">Zip Code</label>
+                        <span asp-validation-for="ZipCode" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" asp-for="Room" class="form-control" placeholder="roomNum">
+                        <label asp-for="Room">Room # / Suite (Optional)</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-btn">
+                    <button type="submit" class="btn btn-primary mx-3 submitBtn">Submit</button>
+                    <button type="button" class="btn btn-light cancle">Cancle</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<partial name="_FooterPartial" />
+
+<script>
+    swal(
+    'Information!',
+    'When submitting a request, you must provide the correct contact information for the patient or the responsibility party. Failure to provide the correct email and phone number will delay service or be declined.',
+    'warning'
+);
+    const phoneInputField = document.querySelector("#BusinessMobile");
+    const phoneInput = window.intlTelInput(phoneInputField, {
+        utilsScript:
+            "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+    });
+</script>
+<script>
+    phoneInputField1 = document.querySelector("#PatientMobile");
+    phoneInput1 = window.intlTelInput(phoneInputField1, {
+        utilsScript:
+            "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+    });
+</script>
+
+<script>
+    const input = document.querySelectorAll("#BusinessMobile");
+
+    input.forEach(i => {
+        window.intlTelInput(i, {
+            initialCountry: "in",
+            autoInsertDialCode: true,
+            nationalMode: false,
+            utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@19.2.16/build/js/utils.js",
+        });
+    })
+</script>
+
+<script>
+    const input1 = document.querySelectorAll("#PatientMobile");
+
+    input1.forEach(i => {
+        window.intlTelInput(i, {
+            initialCountry: "in",
+            autoInsertDialCode: true,
+            nationalMode: false,
+            utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@19.2.16/build/js/utils.js",
+        });
+    })
+</script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<partial name="_ValidationScriptsPartial" />

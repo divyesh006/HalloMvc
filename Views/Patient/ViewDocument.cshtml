@@ -1,0 +1,122 @@
+﻿@model HalloDoc.Entities.Patient.FileUplaod;
+@{
+    int i = 0;
+}
+<head>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/ViewDocument.css">
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+<partial name="_PatientHeaderPartial" />
+
+<div class="mainHeader">
+    <div class="documentBack">
+        <h3>Documents</h3>
+        <div class="BackMainBtn">
+            <button type="button" class="BackBtn" onclick="@("window.location.href='" + @Url.Action("PatientDashboard", "Patient") + "'");">Back</button>
+        </div>
+    </div>
+</div>
+
+<div class="main">
+    <div class="viewDocument">
+        <p class="patientName">Patient Name</p>
+        <p><span class="username"><strong>@ViewBag.UserName</strong></span> </p>
+        <p>Click here for any files that you or the doctors of your subsequents requestors have attached for you to review</p>
+        <form asp-controller="Patient" asp-action="FileUpload" enctype="multipart/form-data">
+            <div class="row mb-2">
+                <div class="col-12 col-sm-12">
+                    <div class="input-group mb-3">
+                        <input type="text" asp-for="RequestId" value="@ViewBag.requestId" hidden/>
+                        <input type="file" class="form-control" asp-for="file" id="UploadButton" asp-action="FileUpload" style="padding-right: 0px;">                      
+                    </div>
+                    
+                </div>
+                <div class="col-12 col-sm-12">
+                    <button type="submit" class="fileSubmit">Submit</button>
+                </div>
+            </div>
+        </form>
+
+        <div class="titleDownload">
+            <h4>Document</h4>
+            <div class="downloadBtn">
+                <button type="button" class="download">Download All</button>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr class="table-active">
+                        <th scope="col" class="tableHead">File Name</th>
+                        <th scope="col" class="tableHead">Uploader</th>
+                        <th scope="col" class="tableHead">Upload Date</th>
+                        <th scope="col" class="tableHead">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var file in ViewBag.file)
+                    {
+                        <tr>
+                            <td>@file.FileName</td>
+                            <td>@ViewBag.username</td>
+                            <td>@file.CreatedDate.ToString("MMM") @file.CreatedDate.Day @file.CreatedDate.Year</td>
+                            <td>
+                                <a class="downloadCloud" asp-action="Download" asp-route-id="@file.RequestWiseFileId">
+                                    <img src="~/image/cloud-arrow-down.svg" />
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+
+
+
+        @foreach (var file in ViewBag.file)
+        {
+            if (true)
+            {
+                i++;
+            }
+
+            <div class="accordion mb-4" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading_@i">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_@i" aria-expanded="true" aria-controls="collapse_@i">
+                            @file.FileName
+                        </button>
+                    </h2>
+                    <div id="collapse_@i" class="accordion-collapse collapse show" aria-labelledby="heading_@i" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            Uploader:
+                            <strong>
+                                @ViewBag.username
+                            </strong>
+                            <br />
+                            Upload Date : @file.CreatedDate.ToString("MMM") @file.CreatedDate.Day @file.CreatedDate.Year
+                            <a class="downloadCloud" asp-action="Download" asp-route-id="@file.RequestWiseFileId">
+                                <img src="~/image/cloud-arrow-down.svg" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        
+    </div>
+</div>
+
+<partial name="_FooterPartial" />
+
+<script>
+
+    function toggleMenu() {
+        var menu1 = document.querySelector('.slideabr');
+        menu1.style.display = (menu1.style.display === 'block') ? 'none' : 'block';
+    }
+</script>

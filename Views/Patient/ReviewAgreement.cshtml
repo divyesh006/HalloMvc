@@ -1,0 +1,56 @@
+﻿
+
+
+
+<div class="d-flex justify-content-between main">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 p-4">
+                To provide best medical service, we cannot determine the cost right away. If you agree to our service, so we will provide care and follow-up until all care is completed. So with this points, if you like us to provide care to you click on "Agree" and we'll get started immediately, if you do not agree simply click "Cancel".
+            </div>
+            <div class="col">
+                <div class="d-flex justify-content-between">
+                    <input type="submit" class="btn btn-success" value="I Agree" />
+                    <input type="button" class="btn btn-danger" data-target="#exampleModalCenter" onclick="openModal()" value="Cancle" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h5 class="modal-title text-light" id="exampleModalLongTitle">Create New Request</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-floating mb-3">
+                            <textarea class="form-control" placeholder="Details" id="Symptomos"></textarea>
+                            <label id="Symptomos" class="disableMobile">
+                                Please Provide a Brief explanation for your cancelation
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="close" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="continue" onclick="onContinueClick()">Continue</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function openModal() {
+        $('#exampleModalCenter').modal('show');
+    }
+</script>

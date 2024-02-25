@@ -1,0 +1,160 @@
+﻿@model HalloDoc_mvc.Entities.Patient.UpdateProfile;
+<head>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/PatientProfile.css">
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+
+<partial name="_PatientHeaderPartial" />
+
+<div class="forBack">
+    <div class="mainHeader">
+        <div class="profileBack">
+            <h3> User Profile</h3>
+            <div class="BackMainBtn">
+                <button type="button" class="BackBtn" onclick="@("window.location.href='" + @Url.Action("PatientDashboard", "Patient") + "'");">Back</button>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="patientProfile">
+            <h5 class="form-label mb-3">General Information</h5>
+            <form asp-action="Update" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" asp-for="FirstName" class="form-control" value="@Model.user.FirstName" placeholder="fname" disabled>
+                            <label>First Name</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" asp-for="LastName" class="form-control" value="@Model.user.LastName" placeholder="lname" disabled>
+                            <label for="LastName">Last Name</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-floating mb-3">
+                            <input type="date" asp-for="BirthDate" value="@ViewBag.DateOfBirth" class="form-control" disabled>
+                            <label>Date Of Birth</label>
+                        </div>
+                    </div>
+                </div>
+                <h5 class="form-label mb-3">Contact Information</h5>
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-floating mb-3">
+                            <input type="email" asp-for="Email" class="form-control" value="@Model.user.Email" placeholder="email" onblur="checkEmailExists()" disabled>
+                            <label>Email</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-floating mb-3">
+                            <input type="tel" asp-for="Mobile" class="form-control" value="@Model.user.Mobile" disabled>
+                        </div>
+                    </div>
+                </div>
+                <h5 class="form-label mb-3">Location Information</h5>
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" asp-for="Street" class="form-control" placeholder="street" value="@Model.user.Street" disabled>
+                            <label>Street</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" asp-for="City" class="form-control" placeholder="city" value="@Model.user.City" disabled>
+                            <label>City</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" asp-for="State" class="form-control" placeholder="state" value="@Model.user.State" disabled>
+                            <label>State</label>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" asp-for="ZipCode" class="form-control" placeholder="zipCode" value="@Model.user.ZipCode" disabled>
+                            <label>Zip Code</label>
+                        </div>
+                    </div>
+                    <div asp-validation-summary="All" class="text-danger" id="message"></div>
+                </div>
+                <div class="row">
+                    <div class="form-btn">
+                        <button type="button" id="editBtn" class="EditBtn" onclick="enableFields()">Edit</button>
+                        <button type="submit" id="submitBtn" class="EditBtn mx-3" style="display:none">Submit</button>
+                        <button type="button" id="cancelBtn" class="EditBtn" onclick="cancelEdit()" style="display:none">Cancle</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<partial name="_FooterPartial" />
+
+<script>
+    function enableFields() {
+        $('input').prop('disabled', false);
+        $('#editBtn').hide();
+        $('#submitBtn').show();
+        $('#cancelBtn').show();
+    }
+
+    function cancelEdit() {
+        $('input').prop('disabled', true);
+        $('#editBtn').show();
+        $('#submitBtn').hide();
+        $('#cancelBtn').hide();
+    }
+</script>
+
+<script>
+    function checkEmailExists() {
+        var email = document.getElementById("Email").value;
+        fetch('/patientprofile/UserCheckEmail/' + email)
+            .then(response => response.json())
+            .then(data => {
+                var submit = document.getElementById('submitBtn');           
+                if (data.exists) {
+                    submit.style.display = 'none';
+                    document.getElementById("message").innerHTML = "This Email is already in use";
+                }
+                else {
+                    submit.style.display = 'block';
+                    document.getElementById("message").innerHTML = "";
+                }               
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    function toggleMenu() {
+        var menu1 = document.querySelector('.slideabr');
+        menu1.style.display = (menu1.style.display === 'block') ? 'none' : 'block';
+    }
+</script>
+
+<script>
+    phoneInputField1 = document.querySelector("#Mobile");
+    phoneInput1 = window.intlTelInput(phoneInputField1, {
+        utilsScript:
+            "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+    });
+</script>
+<script>
+    const input = document.querySelectorAll("#Mobile");
+
+    input.forEach(i => {
+        window.intlTelInput(i, {
+            initialCountry: "in",
+            autoInsertDialCode: true,
+            nationalMode: false,
+            utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@19.2.16/build/js/utils.js",
+        });
+    })
+</script>

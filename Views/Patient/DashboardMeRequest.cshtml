@@ -1,0 +1,158 @@
+﻿@model HalloDoc_mvc.Entities.Patient.DashboardRequest;
+
+<partial name="_PatientHeaderPartial" />
+
+<head>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/DashboardRequest.css">
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+
+<div class="mainHeader">
+    <div class="submitBack">
+        <h3>Submit Information</h3>
+        <div class="BackMainBtn">
+            <button type="button" class="BackBtn" onclick="@("window.location.href='" + @Url.Action("PatientDashboard", "Patient") + "'");">Back</button>
+        </div>
+    </div>
+</div>
+<div class="main">
+    <div class="patient-form">
+        <h5 class="form-label mb-3">Patient Information</h5>
+        <form asp-action="DashboardMeRequest" enctype="multipart/form-data" class="needs-validate" novalidate>
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="form-floating mb-3">
+                        <textarea class="form-control" placeholder="Details" asp-for="Symptomos"></textarea>
+                        <label asp-for="Symptomos" class="disableMobile">
+                            Enter Brief Details Of Symptomos
+                            (Optional)
+                        </label>
+                        <label asp-for="Symptomos" class="disableDesk">Details Of Symptomos (Optional)</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" asp-for="FirstName" class="form-control" placeholder="fname" >
+                        <label asp-for="FirstName">First Name</label>
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" asp-for="LastName" placeholder="lname"  >
+                        <label for="LastName">Last Name</label>
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="date" asp-for="BirthDate" class="form-control" value="@ViewBag.DateOfBirth">
+                        <label asp-for="BirthDate">Date Of Birth</label>
+                    </div>
+                </div>
+            </div>
+            <h5 class="form-label mb-3">Patient Contact Information</h5>
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" asp-for="Email" placeholder="email" >
+                        <label asp-for="Email">Email</label>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="tel" class="form-control" asp-for="Mobile" >
+                        <span asp-validation-for="Mobile" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <h5 class="form-label mb-3">Patient Location</h5>
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" asp-for="Street" class="form-control" placeholder="street">
+                        <label asp-for="Street">Street</label>
+                        <span asp-validation-for="Street" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" asp-for="City" class="form-control" placeholder="city">
+                        <label asp-for="City">City</label>
+                        <span asp-validation-for="City" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" asp-for="State" class="form-control" placeholder="state">
+                        <label asp-for="State">State</label>
+                        <span asp-validation-for="State" class="text-danger"></span>
+                    </div>
+                </div>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" asp-for="ZipCode" class="form-control" placeholder="zipCode">
+                        <label asp-for="ZipCode">Zip Code</label>
+                        <span asp-validation-for="ZipCode" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" asp-for="Room" class="form-control" placeholder="roomNum">
+                        <label asp-for="Room">Room # / Suite (Optional)</label>
+                    </div>
+                </div>
+            </div>
+            <h5 class="my-4">(Optional) Upload Photo or Document</h5>
+            <div class="row mb-2">
+                <div class="col-12 col-sm-12">
+                    <div class="input-group mb-3">
+                        <input type="file" class="form-control" asp-for="file" id="UploadButton" style="padding-right: 0px;">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-btn">
+                    <button type="submit" class="btn btn-primary mx-3 submitBtn">Submit</button>
+                    <button type="button" class="btn btn-light cancle">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<partial name="_FooterPartial" />
+
+<script>
+
+    function toggleMenu() {
+        var menu1 = document.querySelector('.slideabr');
+        menu1.style.display = (menu1.style.display === 'block') ? 'none' : 'block';
+    }
+</script>
+<script>
+    phoneInputField1 = document.querySelector("#Mobile");
+    phoneInput1 = window.intlTelInput(phoneInputField1, {
+        utilsScript:
+            "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+    });
+</script>
+<script>
+    const input1 = document.querySelectorAll("#Mobile");
+
+    input1.forEach(i => {
+        window.intlTelInput(i, {
+            initialCountry: "in",
+            autoInsertDialCode: true,
+            nationalMode: false,
+            utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@19.2.16/build/js/utils.js",
+        });
+    })
+</script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<partial name="_ValidationScriptsPartial" />

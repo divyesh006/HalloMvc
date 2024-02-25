@@ -1,0 +1,30 @@
+﻿
+<head>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/submitReq.css">
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+<partial name="_HeaderPartial" />
+<div class="main">
+    <div class="details">
+        <div class="backbtn">
+            <a asp-controller="Home" asp-action="Index"> &lt; Back</a>
+        </div>
+        <div class="selectBtn">
+            <h2>I am a...</h2>
+            <div class="patients">
+                <button type="submit" class="form-control patient" onclick="@("window.location.href='" + @Url.Action("PatientForm", "Patient") + "'");">PATIENT</button>
+            </div>
+            <div class="familys">
+                <button type="submit" class="form-control family" onclick="@("window.location.href='" + @Url.Action("FamilyForm", "Patient") + "'");">FAMILY / FRIEND</button>
+            </div>
+            <div class="concierges">
+                <button type="submit" class="form-control concierge" onclick="@("window.location.href='" + @Url.Action("ConciergeForm", "Patient") + "'");">CONCIERGE</button>
+            </div>
+            <div class="partnerss">
+                <button type="submit" class="form-control partners" onclick="@("window.location.href='" + @Url.Action("BusinessForm", "Patient") + "'");">BUSINESS PARTNERS</button>
+            </div>
+        </div>
+    </div>
+</div>
+<partial name="_FooterPartial" />
