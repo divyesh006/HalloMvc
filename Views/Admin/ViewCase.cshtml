@@ -1,0 +1,123 @@
+﻿@model HalloDoc_mvc.Entities.Admin.PatientData;
+
+<head>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/Admin/ViewCase.css">
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+
+<partial name="_AdminHeaderPartial" />
+
+
+<div class="forBack">
+    <div class="mainHeader">
+        <div class="titleBack">
+            <div class="namePatient">
+                <h3>New Request</h3>
+                <div class="patientLogo">
+                    Patient
+                </div>
+            </div>
+            <div class="BackMainBtn">
+                <button type="button" class="BackBtn" >Back</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="patientProfile">
+            <h5 class="form-label mb-3">General Information</h5>
+            <form enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-floating mb-3">
+                            <textarea class="form-control" placeholder="Details" readonly>@Model.client.Notes</textarea>
+                            <label class="disableMobile">
+                                Patient Notes
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" asp-for="FirstName" class="form-control" value="@Model.client.FirstName" placeholder="fname" disabled>
+                            <label>First Name</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" asp-for="LastName" class="form-control" value="@Model.client.LastName" placeholder="lname" disabled>
+                            <label for="LastName">Last Name</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-floating mb-3">
+                            <input type="date" asp-for="BirthDate" class="form-control" disabled>
+                            <label>Date Of Birth</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-floating mb-3">
+                            <input type="tel" asp-for="Mobile" class="form-control" value="@Model.client.PhoneNumber" disabled>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control"  value="@Model.client.Email" placeholder="lname" disabled>
+                            <label for="LastName">Email</label>
+                        </div>
+                    </div>
+
+                </div>
+                <h5 class="form-label mb-3">Location Information</h5>
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-floating mb-3">
+                            <input type="text"  class="form-control" placeholder="state" value="@Model.client.State" readonly>
+                            <label>Region</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" placeholder="zipCode" value="@Model.client.Address" readonly>
+                            <label>Address</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" placeholder="zipCode" readonly>
+                            <label>Room</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-btn">
+                        <button type="button" id="editBtn" class="EditBtn" onclick="enableFields()">Edit</button>
+                        <button type="submit" id="submitBtn" class="EditBtn mx-3" style="display:none">Submit</button>
+                        <button type="button" id="cancelBtn" class="EditBtn" onclick="cancelEdit()" style="display:none">Cancle</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<partial name="_FooterPartial" />
+
+
+<script>
+    function enableFields() {
+        $('input').prop('disabled', false);
+        $('#editBtn').hide();
+        $('#submitBtn').show();
+        $('#cancelBtn').show();
+    }
+
+    function cancelEdit() {
+        $('input').prop('disabled', true);
+        $('#editBtn').show();
+        $('#submitBtn').hide();
+        $('#cancelBtn').hide();
+    }
+</script>

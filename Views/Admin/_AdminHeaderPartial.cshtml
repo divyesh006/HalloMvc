@@ -1,0 +1,183 @@
+﻿
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<head>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/Admin/Header.css">
+    
+</head>
+
+<header>
+    <div class="header">
+        <div class="menu-logo">
+            <div class="menu">
+                <button type="button" class="menuBtn" id="menu" onclick="toggleMenu()">
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" fill="rgb(20, 205, 215)" viewBox="0 0 50 50">
+                        <path d="M 0 7.5 L 0 12.5 L 50 12.5 L 50 7.5 L 0 7.5 z M 0 22.5 L 0 27.5 L 50 27.5 L 50 22.5 L 0 22.5 z M 0 37.5 L 0 42.5 L 50 42.5 L 50 37.5 L 0 37.5 z"></path>
+                    </svg>
+                    <div class="slideabr" >
+                        <nav id="sidebarMenu" class="collapse d-block sidebar collapse bg-white slideMenu">
+                            <div class="position-sticky">
+                                <div class="list-group list-group-flush mx-3 mt-4">
+                                    <span><h5>Welcome <strong>@ViewBag.username</strong></h5></span>
+                                </div>
+                                <div class="list-group list-group-flush mx-3 mt-4">
+                                    <a class="list-group-item list-group-item-action py-2 ripple-active slide-link" aria-current="true" onclick="onDashClick()">
+                                        <span>Dashboard</span>
+                                    </a>
+                                </div>
+                                <div class="list-group list-group-flush mx-3 mt-4">
+                                    <a class="list-group-item list-group-item-action py-2 ripple-active slide-link" aria-current="true" >
+                                        <span>Provider Location</span>
+                                    </a>
+                                </div>
+                                <div class="list-group list-group-flush mx-3 mt-4">
+                                    <a class="list-group-item list-group-item-action py-2 ripple-active slide-link" aria-current="true">
+                                        <span>My Profile</span>
+                                    </a>
+                                </div>
+                                <div class="list-group list-group-flush mx-3 mt-4">
+                                    <a class="list-group-item list-group-item-action py-2 ripple-active slide-link" aria-current="true">
+                                        <span>Proviers</span>
+                                    </a>
+                                </div>
+                                <div class="list-group list-group-flush mx-3 mt-4">
+                                    <a class="list-group-item list-group-item-action py-2 ripple-active slide-link" aria-current="true">
+                                        <span>Partners</span>
+                                    </a>
+                                </div>
+                                <div class="list-group list-group-flush mx-3 mt-4">
+                                    <a class="list-group-item list-group-item-action py-2 ripple-active slide-link" aria-current="true">
+                                        <span>Access</span>
+                                    </a>
+                                </div>
+                                <div class="list-group list-group-flush mx-3 mt-4">
+                                    <a class="list-group-item list-group-item-action py-2 ripple-active slide-link" aria-current="true">
+                                        <span>Records</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </button>
+
+            </div>
+            <div class="logo">
+                <img src="/image/logo.jpg" class="hlogo" width="80" height="80">
+            </div>
+        </div>
+        <div class="modes">
+            <div class="userName">
+                <h5>Welcome <strong>@ViewBag.username</strong></h5>
+            </div>
+            <div class="logoutBtn">
+                <button type="button" class="logoutM" onclick="@("window.location.href='" + @Url.Action("PatientLogout", "Patient") + "'");">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(20, 205, 215)" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
+                        <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+                    </svg>
+                </button>
+                <button type="button" class="logout" onclick="@("window.location.href='" + @Url.Action("PatientLogout", "Patient") + "'");">Logout</button>
+            </div>
+            <div class="darkMode">
+                <img src="/image/noun-dark-mode-4066359.svg" alt="" width="30" height="25">
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="headerBottom">
+        <div class="nav">
+            <a class="nav-link mactive" id="dashboard" onclick="onDashClick()">Dashboard</a>
+            <a class="nav-link" id="providerlocation" onclick="onProvidersClick()">Provider Location</a>
+            <a class="nav-link" id="profile" onclick="onProfileClick()">My Profile</a>
+            <a class="nav-link" id="providers" onclick="onProviderClick()">Proviers</a>
+            <a class="nav-link" id="partners" onclick="onPartnersClick()">Partners</a>
+            <a class="nav-link" id="access" onclick="onAccessClick()">Access</a>
+            <a class="nav-link" id="records" onclick="onRecordsClick()">Records</a>
+
+        </div>
+    </div>
+</header>
+
+<script>
+    function onDashClick() {
+        var element = document.getElementById("dashboard");
+        element.classList.add("mactive");
+        document.getElementById("providerlocation").classList.remove("mactive");
+        document.getElementById("profile").classList.remove("mactive");
+        document.getElementById("providers").classList.remove("mactive");
+        document.getElementById("partners").classList.remove("mactive");
+        document.getElementById("access").classList.remove("mactive");
+        document.getElementById("records").classList.remove("mactive");
+    }
+    function onProvidersClick() {
+        var element = document.getElementById("providerlocation");
+        element.classList.add("mactive");
+        document.getElementById("dashboard").classList.remove("mactive");
+        document.getElementById("profile").classList.remove("mactive");
+        document.getElementById("providers").classList.remove("mactive");
+        document.getElementById("partners").classList.remove("mactive");
+        document.getElementById("access").classList.remove("mactive");
+        document.getElementById("records").classList.remove("mactive");
+    }
+
+    function onProfileClick() {
+        var element = document.getElementById("profile");
+        element.classList.add("mactive");
+        document.getElementById("dashboard").classList.remove("mactive");
+        document.getElementById("providerlocation").classList.remove("mactive");
+        document.getElementById("providers").classList.remove("mactive");
+        document.getElementById("partners").classList.remove("mactive");
+        document.getElementById("access").classList.remove("mactive");
+        document.getElementById("records").classList.remove("mactive");
+    }
+    
+    function onProviderClick() {
+        var element = document.getElementById("providers");
+        element.classList.add("mactive");
+        document.getElementById("dashboard").classList.remove("mactive");
+        document.getElementById("providerlocation").classList.remove("mactive");
+        document.getElementById("profile").classList.remove("mactive");
+        document.getElementById("partners").classList.remove("mactive");
+        document.getElementById("access").classList.remove("mactive");
+        document.getElementById("records").classList.remove("mactive");
+    }
+    function onPartnersClick() {
+        var element = document.getElementById("partners");
+        element.classList.add("mactive");
+        document.getElementById("dashboard").classList.remove("mactive");
+        document.getElementById("providerlocation").classList.remove("mactive");
+        document.getElementById("profile").classList.remove("mactive");
+        document.getElementById("providers").classList.remove("mactive");
+        document.getElementById("access").classList.remove("mactive");
+        document.getElementById("records").classList.remove("mactive");
+    }
+    function onAccessClick() {
+        var element = document.getElementById("access");
+        element.classList.add("mactive");
+        document.getElementById("dashboard").classList.remove("mactive");
+        document.getElementById("providerlocation").classList.remove("mactive");
+        document.getElementById("profile").classList.remove("mactive");
+        document.getElementById("providers").classList.remove("mactive");
+        document.getElementById("partners").classList.remove("mactive");
+        document.getElementById("records").classList.remove("mactive");
+    }
+    function onRecordsClick() {
+        var element = document.getElementById("records");
+        element.classList.add("mactive");
+        document.getElementById("dashboard").classList.remove("mactive");
+        document.getElementById("providerlocation").classList.remove("mactive");
+        document.getElementById("profile").classList.remove("mactive");
+        document.getElementById("providers").classList.remove("mactive");
+        document.getElementById("partners").classList.remove("mactive");
+        document.getElementById("access").classList.remove("mactive");
+    }
+
+    function toggleMenu() {
+        var menu1 = document.querySelector('.slideabr');
+        menu1.style.display = (menu1.style.display === 'block') ? 'none' : 'block';
+    }
+</script>
