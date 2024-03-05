@@ -1,0 +1,530 @@
+﻿<head>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/Admin/Dashboard.css">
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+
+<partial name="_AdminHeaderPartial" />
+
+<div class="main">
+    <div class="statusBtns">
+            <div class="newBtns">
+            <button class="newBtn nactive" id="newBtn" onclick="onNewClick()">
+                    <div class="imgStatus">
+                        <div class="iconDashboard">
+                            <i class="bi bi-person-plus-fill d-none d-md-block me-2" height="40" width="40"></i>
+                        </div>
+                    @* <img src="~/image/newSvg.svg" class="imgBtn" height="30" width="30" /> *@
+                    <div class="dashBoardStatus">
+                        New
+                        </div>
+                    </div>
+                    <div class="total">
+                        <p>@Model.New</p>
+                    </div>
+                </button>
+            </div>
+                <div class="pendingBtns">
+                <button class="pendingBtn" id="pendingBtn" onclick="onPendingClick()">
+                    <div class="imgStatus">
+                        <div class="iconDashboard">
+                            <i class="bi bi-hourglass-split d-none d-md-block" height="40" width="40"></i>
+                        </div>
+                    <div class="dashBoardStatus">Pending</div>
+                    </div>
+                    <div class="total">
+                        <p>@Model.Pending</p>
+                    </div>
+                </button>
+            </div>
+                <div class="activeBtns" >
+                <button class="activeBtn" id="activeBtn" onclick="onActiveClick()">
+                    <div class="imgStatus">
+                        <div class="iconDashboard">
+                            <i class="bi bi-check2-circle d-none d-md-block" height="40" width="40"></i>
+                        </div>
+                    <div class="dashBoardStatus">Active</div>
+                    </div>
+                    <div class="total">
+                        <p>@Model.Active</p>
+                    </div>
+                </button>
+            </div>
+                <div class="concludeBtns" >
+                <button class="concludeBtn" id="concludeBtn" onclick="onConcludeClick()">
+                    <div class="imgStatus">
+                        <div class="iconDashboard">
+                            <i class="bi bi-clock-history d-none d-md-block" height="40" width="40"></i>
+                        </div>
+                    <div class="dashBoardStatus">Conclude</div>
+                    </div>
+                    <div class="total">
+                        <p>@Model.Conclude</p>
+                    </div>
+                </button>
+            </div>
+                <div class="closeBtns" >
+                <button class="closeBtn" id="closeBtn" onclick="onCloseClick()">
+                    <div class="imgStatus">
+                        <div class="iconDashboard">
+                        <i class="bi bi-person-x-fill d-none d-md-block" height="40" width="40"></i>
+                        </div>
+                    <div class="dashBoardStatus">Close</div>
+                    </div>
+                    <div class="total">
+                        <p>@Model.Close</p>
+                    </div>
+                </button>
+            </div>
+                <div class="unpaidBtns" >
+                <button class="unpaidBtn" id="unpaidBtn" onclick="onUnpaidClick()">
+                    <div class="imgStatus">
+                        <div class="iconDashboard">
+                        <i class="bi bi-cash d-none d-md-block" height="40" width="40"></i>
+                        </div>
+                    <div class="dashBoardStatus">Unpaid</div>
+                    </div>
+                    <div class="total">
+                        <p>@Model.Unpaid</p>
+                    </div>
+                </button>
+            </div>
+    </div>
+
+    <div class="titleBtn">
+        <h3>Patient (<span class="type" id="type">New</span>)</h3>
+        <div class="Btns">
+            <button class="sendLink" data-bs-toggle="modal" data-bs-target="#sendLinkModal">
+                <img src="~/image/send.svg" height="25" width="25" />
+                <div class="btnName">
+                    Send Link
+                </div>
+            </button>
+            <button class="request">
+                <img src="~/image/create.svg" height="25" width="25" />
+                <div class="btnName">
+                    Create Requests
+                </div>
+            </button>
+            <button class="export">
+                <img src="~/image/share.svg" height="30" width="30" />
+                <div class="btnName">
+                    Export
+                </div>
+            </button>
+            <button class="exportAll">
+                <img src="~/image/share.svg" height="30" width="30" />
+                <div class="btnName">
+                    Export All
+                </div>
+            </button>
+            <button class="support">
+                <img src="~/image/support.svg" height="25" width="25" />
+                <div class="btnName">
+                    Request DIY Support
+                </div>
+            </button>
+        </div>
+    </div>
+
+    <div class="adminMainTable">
+        <div class="adminTable">
+            <div class="tableHead">
+                <div class="tableForm">
+                    <input type="search" class="form-control searchfirst mx-2 mb-2" id="search" />
+                   @*  <input type="search" class="form-control searchfirst mx-2 mb-2" id="search" /> *@
+                    <select class="form-control form-select" aria-label="Default select example" id="searchRegion">
+                        <option value="">Select Region</option>
+                        @foreach (var region in Model.region)
+                        {
+                            <option value="@region.Name">@region.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="tableInfo">
+                    <div class="patientInfo" type="button" id="all">
+@*                         <div class="patientList mx-2">
+                        </div> *@
+                        <div class="infoName">
+                            All
+                        </div>
+                    </div>
+                    <div class="patientInfo" type="button" id="patient">
+                        <div class="patientList mx-2">
+                        </div>
+                        <div class="infoName">
+                            Patient
+                        </div>
+                    </div>
+                    <div class="patientInfo" type="button" id="family">
+                        <div class="familyList mx-2">
+                        </div>
+                        <div class="infoName">
+                           Family/Friend
+                        </div>
+                    </div>
+                    <div class="patientInfo" type="button" id="business">
+                        <div class="businessList mx-2">
+                        </div>
+                        <div class="infoName">
+                            Business
+                        </div>
+                    </div>
+                    <div class="patientInfo" type="button" id="concierge">
+                        <div class="conciergeList mx-2">
+                        </div>
+                        <div class="infoName">
+                            Concierge
+                        </div>
+                    </div>
+@*                     <div class="patientInfo">
+                        <div class="vipList mx-2">
+                        </div>
+                        <div class="infoName">
+                            Vip
+                        </div>
+                    </div> *@
+                </div>
+            </div>
+            <div class="loader"></div>
+
+            <div id="tableContent">
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="sendLinkModal" tabindex="-1" role="dialog" aria-labelledby="sendLinkModalTitle" aria-hidden="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+
+
+<partial name="_FooterPartial" />
+
+
+
+<script>
+    $(document).ready(function () {
+        // $('#examplemodalCenter').modal('show');
+        load();
+        $('#newBtn').click(function () {
+            $("#loader").show();
+            $.ajax({
+                url: "/Admin/NewTable",
+                type: "POST",
+                dataType: "html",
+                success: function (data) {
+                    $("#tableContent").html(data);
+                },
+                error: function () {
+                    alert("No Projects Found");
+                    $("#tableContent").html('An error has occurred');
+                }
+            });
+        });
+
+        $('#pendingBtn').click(function () {
+            $("#loader").show();
+            $.ajax({
+                url: "/Admin/PendingTable",
+                type: "POST",
+                dataType: "html",
+                success: function (data) {
+                    $("#tableContent").html(data);
+                },
+                error: function () {
+                    alert("No Projects Found");
+                    $("#tableContent").html('An error has occurred');
+                }
+            });
+        });
+
+        $('#concludeBtn').click(function () {
+            $.ajax({
+                url: "/Admin/ConcludeTable",
+                type: "POST",
+                dataType: "html",
+                success: function (data) {
+                    $("#tableContent").html(data);
+                },
+                error: function () {
+                    alert("No Projects Found");
+                    $("#tableContent").html('An error has occurred');
+                }
+            });
+        });
+
+        $('#closeBtn').click(function () {
+            $.ajax({
+                url: "/Admin/CloseTable",
+                type: "POST",
+                dataType: "html",
+                success: function (data) {
+                    $("#tableContent").html(data);
+                },
+                error: function () {
+                    alert("No Projects Found");
+                    $("#tableContent").html('An error has occurred');
+                }
+            });
+        });
+
+
+        $('#unpaidBtn').click(function () {
+            $.ajax({
+                url: "/Admin/UnpaidTable",
+                type: "POST",
+                dataType: "html",
+                success: function (data) {
+                    $("#tableContent").html(data);
+                },
+                error: function () {
+                    alert("No Projects Found");
+                    $("#tableContent").html('An error has occurred');
+                }
+            });
+        });
+
+        $('#activeBtn').click(function () {
+            $.ajax({
+                url: "/Admin/ActiveTable",
+                type: "POST",
+                dataType: "html",
+                success: function (data) {
+                    $("#tableContent").html(data);
+                },
+                error: function () {
+                    alert("No Projects Found");
+                    $("#tableContent").html('An error has occurred');
+                }
+            });
+        });
+
+
+        $('.sendLink').click(function () {
+            var id = this.id;
+            console.log(id);
+            $.ajax({
+                type: "POST",
+                dataType: "html",
+                data: { id },
+                url: "@(Url.Action("SendLink", "Admin"))",
+                success: function (data) {
+                    $("#sendLinkModal").find('.modal-content').html(data);
+                },
+                error: function () {
+                    alert("No Projects Found");
+                    $("#modal").html('An error has occurred');
+                }
+            });
+        });
+
+
+        $("#search").on("input", function () {
+            var value = $(this).val().toLowerCase();
+            $(".accordion-item").filter(function () {
+                $(this).toggle($(this).find('.accordianName strong').text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+
+        $("#search").on("input", function () {
+                var value = $(this).val().toLowerCase();
+            $("#searchHere tr").filter(function () {
+                $(this).toggle($(this).find('td:eq(0)').text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+
+        function filterTableByAddress(address) {
+            $('#searchHere tr').hide();
+            $('#searchHere tr').filter(function () {
+                return $(this).find('td:eq(5)').text().indexOf(address) > -1;
+            }).show();
+        }
+
+        // Listen for changes in the select element
+        $('#searchRegion').change(function () {
+            var selectedAddress = $(this).val();
+            if (selectedAddress === '') {
+                $('#searchHere tr').show(); // Show all rows if no address selected
+            } else {
+                filterTableByAddress(selectedAddress); // Filter rows based on selected address
+            }
+        });
+
+        // $("#searchRegion").on("input", function () {
+        //     var value = $(this).val().toLowerCase();
+        //     $("#searchHere tr").filter(function () {
+        //         $(this).toggle($(this).find('td:eq(5)').text().toLowerCase().indexOf(value) > -1)
+        //     });
+        // });
+
+        $('#all').click(function () {
+            $('#myTable tbody tr').each(function (index, item) {
+                if ($(item).hasClass('status_2') || $(item).hasClass('status_1') || $(item).hasClass('status_3') || $(item).hasClass('status_4')) {
+                    $(item).show();
+                } else {
+                    $(item).hide();
+                }
+            });
+        });
+
+        $('#family').click(function () {
+            $('#myTable tbody tr').each(function (index, item) {
+                if ($(item).hasClass('status_2')) {
+                    $(item).show();
+                } else {
+                    $(item).hide();
+                }
+            });
+        });
+
+        $('#patient').click(function () {
+            $('#myTable tbody tr').each(function (index, item) {
+                if ($(item).hasClass('status_1')) {
+                    $(item).show();
+                } else {
+                    $(item).hide();
+                }
+            });
+        });
+
+        $('#concierge').click(function () {
+            $('#myTable tbody tr').each(function (index, item) {
+                if ($(item).hasClass('status_3')) {
+                    $(item).show();
+                } else {
+                    $(item).hide();
+                }
+            });
+        });
+
+        $('#business').click(function () {
+            $('#myTable tbody tr').each(function (index, item) {
+                if ($(item).hasClass('status_4')) {
+                    $(item).show();
+                } else {
+                    $(item).hide();
+                }
+            });
+        });
+        //$('#table tbody tr').eahc(function(index,item){
+        // if($(item).hasClass('tr-greenn'){
+        // show()}else{hide();})
+        //  if($('#table tbody tr').hasclass('tr-green')){ ('#tbale tbody tr').show()}else{('#tbale tbody tr').hide()}
+        // })
+
+       
+    });
+    function load() {
+        $(".loader").show();
+        $.ajax({
+            url: "/Admin/NewTable",
+            type: "POST",
+            dataType: "html",
+            success: function (data) {
+                $(".loader").hide();
+                $("#tableContent").html(data);
+            },
+            error: function () {
+                $(".loader").hide();
+                alert("No Projects Found");
+                $("#tableContent").html('An error has occurred');
+            }
+        });
+    }
+
+
+
+    function onNewClick() {
+        var element = document.getElementById("newBtn");
+        element.classList.add("nactive");
+        document.getElementById("pendingBtn").classList.remove("pactive");
+        document.getElementById("activeBtn").classList.remove("aactive");
+        document.getElementById("concludeBtn").classList.remove("cactive");
+        document.getElementById("closeBtn").classList.remove("closeactive");
+        document.getElementById("access").classList.remove("mactive");
+        document.getElementById("unpaidBtn").classList.remove("uactive");
+        document.getElementById("type").innerHTML = "New";
+    }
+
+    function onPendingClick() {
+        var element = document.getElementById("pendingBtn");
+        element.classList.add("pactive");
+        document.getElementById("newBtn").classList.remove("nactive");
+        document.getElementById("activeBtn").classList.remove("aactive");
+        document.getElementById("concludeBtn").classList.remove("cactive");
+        document.getElementById("closeBtn").classList.remove("closeactive");
+        document.getElementById("access").classList.remove("mactive");
+        document.getElementById("unpaidBtn").classList.remove("uactive");
+        document.getElementById("type").innerHTML = "Pending";
+    }
+
+    function onActiveClick() {
+        var element = document.getElementById("activeBtn");
+        element.classList.add("aactive");
+        document.getElementById("newBtn").classList.remove("nactive");
+        document.getElementById("pendingBtn").classList.remove("pactive");
+        document.getElementById("concludeBtn").classList.remove("cactive");
+        document.getElementById("closeBtn").classList.remove("closeactive");
+        document.getElementById("access").classList.remove("mactive");
+        document.getElementById("unpaidBtn").classList.remove("uactive");
+        document.getElementById("type").innerHTML = "Active";
+    }
+
+    function onConcludeClick() {
+        var element = document.getElementById("concludeBtn");
+        element.classList.add("cactive");
+        document.getElementById("newBtn").classList.remove("nactive");
+        document.getElementById("pendingBtn").classList.remove("pactive");
+        document.getElementById("activeBtn").classList.remove("aactive");
+        document.getElementById("closeBtn").classList.remove("closeactive");
+        document.getElementById("access").classList.remove("mactive");
+        document.getElementById("unpaidBtn").classList.remove("uactive");
+        document.getElementById("type").innerHTML = "Conclude";
+    }
+    
+
+    function onCloseClick() {
+        var element = document.getElementById("closeBtn");
+        element.classList.add("closeactive");
+        document.getElementById("newBtn").classList.remove("nactive");
+        document.getElementById("pendingBtn").classList.remove("pactive");
+        document.getElementById("activeBtn").classList.remove("aactive");
+        document.getElementById("concludeBtn").classList.remove("cactive");
+        document.getElementById("access").classList.remove("mactive");
+        document.getElementById("unpaidBtn").classList.remove("uactive");
+        document.getElementById("type").innerHTML = "Close";
+    }
+
+    function onUnpaidClick() {
+        var element = document.getElementById("unpaidBtn");
+        element.classList.add("uactive");
+        document.getElementById("newBtn").classList.remove("nactive");
+        document.getElementById("pendingBtn").classList.remove("pactive");
+        document.getElementById("activeBtn").classList.remove("aactive");
+        document.getElementById("concludeBtn").classList.remove("cactive");
+        document.getElementById("access").classList.remove("mactive");
+        document.getElementById("closeBtn").classList.remove("closeactive");
+        document.getElementById("type").innerHTML = "Unpaid";
+    }
+
+
+</script>
+
+
+@* <script>
+        $(document).ready(function () {
+        
+ </script>
+
+<script>
+    $(document).ready(function () {
+       
+    });
+</script>
+ *@
+        
